@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace=".dao.StCatalogDao">
+
+    <resultMap type=".entity.StCatalog" id="StCatalogMap">
+        <result property="id" column="id" jdbcType="VARCHAR"/>
+        <result property="name" column="name" jdbcType="VARCHAR"/>
+        <result property="state" column="state" jdbcType="VARCHAR"/>
+        <result property="remark" column="remark" jdbcType="VARCHAR"/>
+        <result property="orderNo" column="order_no" jdbcType="INTEGER"/>
+        <result property="createBy" column="create_by" jdbcType="VARCHAR"/>
+        <result property="createDept" column="create_dept" jdbcType="VARCHAR"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+        <result property="updateBy" column="update_by" jdbcType="VARCHAR"/>
+        <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+        <result property="courseId" column="course_id" jdbcType="VARCHAR"/>
+        <result property="courseName" column="course_name" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="StCatalogMap">
+        select id,
+               name,
+               state,
+               remark,
+               order_no,
+               create_by,
+               create_dept,
+               create_time,
+               update_by,
+               update_time,
+               course_id,
+               course_name
+        from db_heima_mm.st_catalog
+        where id = #{id}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="StCatalogMap">
+        select id,
+               name,
+               state,
+               remark,
+               order_no,
+               create_by,
+               create_dept,
+               create_time,
+               update_by,
+               update_time,
+               course_id,
+               course_name
+        from db_heima_mm.st_catalog
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="StCatalogMap">
+        select
+        id, name, state, remark, order_no, create_by, create_dept, create_time, update_by, update_time, course_id,
+        course_name
+        from db_heima_mm.st_catalog
+        <where>
+            <if test="id != null and id != ''">
+                and id = #{id}
+            </if>
+            <if test="name != null and name != ''">
+                and name = #{name}
+            </if>
+            <if test="state != null and state != ''">
+                and state = #{state}
+            </if>
+            <if test="remark != null and remark != ''">
+                and remark = #{remark}
+            </if>
+            <if test="orderNo != null">
+                and order_no = #{orderNo}
+            </if>
+            <if test="createBy != null and createBy != ''">
+                and create_by = #{createBy}
+            </if>
+            <if test="createDept != null and createDept != ''">
+                and create_dept = #{createDept}
+            </if>
+            <if test="createTime != null">
+                and create_time = #{createTime}
+            </if>
+            <if test="updateBy != null and updateBy != ''">
+                and update_by = #{updateBy}
+            </if>
+            <if test="updateTime != null">
+                and update_time = #{updateTime}
+            </if>
+            <if test="courseId != null and courseId != ''">
+                and course_id = #{courseId}
+            </if>
+            <if test="courseName != null and courseName != ''">
+                and course_name = #{courseName}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        insert into db_heima_mm.st_catalog(name, state, remark, order_no, create_by, create_dept, create_time,
+                                           update_by, update_time, course_id, course_name)
+        values (#{name}, #{state}, #{remark}, #{orderNo}, #{createBy}, #{createDept}, #{createTime}, #{updateBy},
+                #{updateTime}, #{courseId}, #{courseName})
+    </insert>
+
+    <insert id="insertBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into db_heima_mm.st_catalog(name, state, remark, order_no, create_by, create_dept, create_time,
+        update_by, update_time, course_id, course_name)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.name}, #{entity.state}, #{entity.remark}, #{entity.orderNo}, #{entity.createBy},
+            #{entity.createDept}, #{entity.createTime}, #{entity.updateBy}, #{entity.updateTime}, #{entity.courseId},
+            #{entity.courseName})
+        </foreach>
+    </insert>
+
+    <insert id="insertOrUpdateBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into db_heima_mm.st_catalog(name, state, remark, order_no, create_by, create_dept, create_time,
+        update_by, update_time, course_id, course_name)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.name}, #{entity.state}, #{entity.remark}, #{entity.orderNo}, #{entity.createBy},
+            #{entity.createDept}, #{entity.createTime}, #{entity.updateBy}, #{entity.updateTime}, #{entity.courseId},
+            #{entity.courseName})
+        </foreach>
+        on duplicate key update
+        name = values(name) , state = values(state) , remark = values(remark) , order_no = values(order_no) , create_by
+        = values(create_by) , create_dept = values(create_dept) , create_time = values(create_time) , update_by =
+        values(update_by) , update_time = values(update_time) , course_id = values(course_id) , course_name =
+        values(course_name)
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update db_heima_mm.st_catalog
+        <set>
+            <if test="name != null and name != ''">
+                name = #{name},
+            </if>
+            <if test="state != null and state != ''">
+                state = #{state},
+            </if>
+            <if test="remark != null and remark != ''">
+                remark = #{remark},
+            </if>
+            <if test="orderNo != null">
+                order_no = #{orderNo},
+            </if>
+            <if test="createBy != null and createBy != ''">
+                create_by = #{createBy},
+            </if>
+            <if test="createDept != null and createDept != ''">
+                create_dept = #{createDept},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime},
+            </if>
+            <if test="updateBy != null and updateBy != ''">
+                update_by = #{updateBy},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime},
+            </if>
+            <if test="courseId != null and courseId != ''">
+                course_id = #{courseId},
+            </if>
+            <if test="courseName != null and courseName != ''">
+                course_name = #{courseName},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete
+        from db_heima_mm.st_catalog
+        where id = #{id}
+    </delete>
+
+</mapper>
+
