@@ -81,13 +81,13 @@
                 </a>
                 <ul class="treeview-menu">
                     <li id="course-manager">
-                        <a href="${ctx}/store/course?operation=list" onclick="setSidebarActive(this)"
+                        <a href="${ctx}/course/getCourse" onclick="setSidebarActive(this)"
                            target="iframe">
                             <i class="fa fa-circle-o"></i>题目学科管理
                         </a>
                     </li>
                     <li id="catalog-manager">
-                        <a href="${ctx}/store/catalog?operation=list" onclick="setSidebarActive(this)"
+                        <a href="${ctx}/catalog/getCatalog" onclick="setSidebarActive(this)"
                            target="iframe">
                             <i class="fa fa-circle-o"></i>题目类型管理
                         </a>

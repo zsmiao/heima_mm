@@ -2,6 +2,7 @@ package xyz.itclay.heima_mm.domain.store;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 /**
  * (StCatalog)实体类
@@ -40,6 +41,15 @@ public class Catalog implements Serializable {
 
     private String courseName;
 
+    private Course course;
+
+    public Course getCourse() {
+        return course;
+    }
+
+    public void setCourse(Course course) {
+        this.course = course;
+    }
 
     public String getId() {
         return id;

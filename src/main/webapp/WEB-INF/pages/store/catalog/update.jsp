@@ -37,9 +37,9 @@
                                 <div class="col-md-10 data line-height36">
                                     <select class="form-control" name="courseId" onchange="document.getElementById('courseName').value=this.options[this.selectedIndex].text">
                                         <option value="">请选择</option>
-                                        <c:forEach items="${courseList}" var="item">
+                                     <%--   <c:forEach items="${courseList}" var="item">
                                             <option ${catalog.courseId == item.id ?'selected':''} value="${item.id}">${item.name}</option>
-                                        </c:forEach>
+                                        </c:forEach>--%>
                                     </select>
                                 </div>
                                 <div class="col-md-2 title">目录名称</div>

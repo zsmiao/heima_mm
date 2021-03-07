@@ -36,13 +36,13 @@ public class User implements Serializable {
 
     private String telephone;
 
-    private String birthday;
+    private Date birthday;
 
     private Integer degree;
 
     private Double salary;
 
-    private String joinDate;
+    private Date joinDate;
 
     private Integer orderNo;
 
@@ -139,11 +139,11 @@ public class User implements Serializable {
         this.telephone = telephone;
     }
 
-    public String getBirthday() {
+    public Date getBirthday() {
         return birthday;
     }
 
-    public void setBirthday(String birthday) {
+    public void setBirthday(Date birthday) {
         this.birthday = birthday;
     }
 
@@ -163,11 +163,11 @@ public class User implements Serializable {
         this.salary = salary;
     }
 
-    public String getJoinDate() {
+    public Date getJoinDate() {
         return joinDate;
     }
 
-    public void setJoinDate(String joinDate) {
+    public void setJoinDate(Date joinDate) {
         this.joinDate = joinDate;
     }
 

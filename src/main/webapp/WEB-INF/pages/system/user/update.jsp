@@ -82,7 +82,7 @@
                                 <i class="fa fa-calendar"></i>
                             </div>
                             <input type="text" placeholder="出生年月" class="form-control pull-right" name="birthday"
-                                  <%-- value="<fmt:formatDate value="${user.birthday}" pattern="yyyy-MM-dd"/>" id="datepicker1">--%>
+                                   value="<fmt:formatDate value="${user.birthday}" pattern="yyyy-MM-dd"/>" id="datepicker1">
                         </div>
                     </div>
 
@@ -106,7 +106,7 @@
                                 <i class="fa fa-calendar"></i>
                             </div>
                             <input type="text" placeholder="入职时间"  name="joinDate" class="form-control pull-right"
-                                  <%-- value="<fmt:formatDate value="${user.joinDate}" pattern="yyyy-MM-dd"/>" id="2">--%>
+                                   value="<fmt:formatDate value="${user.joinDate}" pattern="yyyy-MM-dd"/>" id="2">
                         </div>
                     </div>
                 </div>

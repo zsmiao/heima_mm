@@ -59,7 +59,7 @@
                 <div class="pull-left">
                     <div class="form-group form-inline">
                         <div class="btn-group">
-                            <button type="button" class="btn btn-default" title="新建" onclick='location.href="${ctx}/store/course?operation=toAdd"'><i class="fa fa-file-o"></i> 新建</button>
+                            <button type="button" class="btn btn-default" title="新建" onclick='location.href="${ctx}/path/addCourse"'><i class="fa fa-file-o"></i> 新建</button>
                             <button type="button" class="btn btn-default" title="删除" onclick='deleteById()'><i class="fa fa-trash-o"></i> 删除</button>
                             <button type="button" class="btn btn-default" title="刷新" onclick="window.location.reload();"><i class="fa fa-refresh"></i> 刷新</button>
                         </div>
@@ -96,7 +96,7 @@
                         <td>${course.remark}</td>
                         <td>${course.state eq "1" ? "<font color='green'>正常</font>" : "<font color='red'>禁用</font>"}</td>
                         <th class="text-center">
-                            <button type="button" class="btn bg-olive btn-xs" onclick='location.href="${ctx}/store/course?operation=toEdit&id=${o.id}"'>编辑</button>
+                            <button type="button" class="btn bg-olive btn-xs" onclick='location.href="${ctx}/path/updateCourse?id=${course.id}"'>编辑</button>
                         </th>
                     </tr>
                     </c:forEach>
@@ -106,7 +106,7 @@
         </div>
         <div class="box-footer">
             <jsp:include page="../../common/page.jsp">
-                <jsp:param value="${ctx}/store/course?operation=list" name="pageUrl"/>
+                <jsp:param value="${ctx}/course/getCourse" name="pageUrl"/>
             </jsp:include>
         </div>
     </div>

@@ -28,7 +28,7 @@
                         </li>
                     </ul>
                     <div class="tab-content">
-                        <form id="editForm" action="${ctx}/store/course?operation=save" method="post">
+                        <form id="editForm" action="${ctx}/course/addCourse" method="post">
                             <div class="tab-pane active" id="tab-form">
                                 <div class="row data-type">
                                     <div class="col-md-2 title">学科名称</div>

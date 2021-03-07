@@ -59,7 +59,7 @@
                 <div class="pull-left">
                     <div class="form-group form-inline">
                         <div class="btn-group">
-                            <button type="button" class="btn btn-default" title="新建" onclick='location.href="${ctx}/store/catalog?operation=toAdd"'><i class="fa fa-file-o"></i> 新建</button>
+                            <button type="button" class="btn btn-default" title="新建" onclick='location.href="${ctx}/path/addCatalog"'><i class="fa fa-file-o"></i> 新建</button>
                             <button type="button" class="btn btn-default" title="删除" onclick='deleteById()'><i class="fa fa-trash-o"></i> 删除</button>
                             <button type="button" class="btn btn-default" title="刷新" onclick="window.location.reload();"><i class="fa fa-refresh"></i> 刷新</button>
                         </div>
@@ -94,9 +94,9 @@
                         <td>${catalog.name}</td>
                         <td>${catalog.remark}</td>
                         <td>${catalog.state eq "1" ? "<font color='green'>使用中</font>" : "<font color='red'>已禁用</font>"}</td>
-                        <td>${catalog.course.name}</td>
+                        <td>${catalog.courseName}</td>
                         <th class="text-center">
-                            <button type="button" class="btn bg-olive btn-xs" onclick='location.href="${ctx}/store/catalog?operation=toEdit&id=${catalog.id}"'>编辑</button>
+                            <button type="button" class="btn bg-olive btn-xs" onclick='location.href="${ctx}/path/updateCatalog?id=${catalog.id}"'>编辑</button>
                         </th>
                     </tr>
                     </c:forEach>
