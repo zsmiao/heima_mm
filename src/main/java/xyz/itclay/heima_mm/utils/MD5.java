@@ -17,9 +17,9 @@ public class MD5 {
             byte b[] = md.digest();
             int i;
 
-            StringBuffer buf = new StringBuffer("");
-            for (int offset = 0; offset < b.length; offset++) {
-                i = b[offset];
+            StringBuilder buf = new StringBuilder("");
+            for (byte value : b) {
+                i = value;
                 if (i < 0) {
                     i += 256;
                 }
@@ -36,8 +36,8 @@ public class MD5 {
         return str;
     }
 
-    public static void main(String[] args) {
+   /* public static void main(String[] args) {
         System.out.println(md5("11111@qq.com" + "123456"));
         System.out.println(md5("mj1"));
-    }
+    }*/
 }

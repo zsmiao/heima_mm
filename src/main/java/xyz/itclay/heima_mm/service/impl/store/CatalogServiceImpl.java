@@ -10,9 +10,8 @@ import xyz.itclay.heima_mm.utils.MyBatisUtils;
 import java.util.List;
 
 /**
- *
  * @author ZhangSenmiao
- * @date   2021/3/6 19:40
+ * @date 2021/3/6 19:40
  **/
 public class CatalogServiceImpl implements CatalogService {
     @Override
@@ -35,5 +34,17 @@ public class CatalogServiceImpl implements CatalogService {
     public Catalog findById(String id) {
         CatalogMapper mapper = MyBatisUtils.getMapper(CatalogMapper.class);
         return mapper.findById(id);
+    }
+
+    @Override
+    public List<Catalog> findAll() {
+        CatalogMapper mapper = MyBatisUtils.getMapper(CatalogMapper.class);
+        return mapper.findAll();
+    }
+
+    @Override
+    public void addCatalog(Catalog catalog) {
+        CatalogMapper mapper = MyBatisUtils.getMapper(CatalogMapper.class);
+        mapper.addCatalog(catalog);
     }
 }

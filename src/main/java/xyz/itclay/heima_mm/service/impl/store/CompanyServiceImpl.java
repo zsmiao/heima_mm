@@ -55,5 +55,11 @@ public class CompanyServiceImpl implements CompanyService {
         CompanyMapper mapper = MyBatisUtils.getMapper(CompanyMapper.class);
         mapper.deleteCompany(id);
     }
+
+    @Override
+    public List<Company> findAll() {
+        CompanyMapper mapper = MyBatisUtils.getMapper(CompanyMapper.class);
+        return mapper.findAll();
+    }
 }
 

@@ -3,17 +3,26 @@ package xyz.itclay.heima_mm.servlet;
 import xyz.itclay.heima_mm.domain.store.Catalog;
 import xyz.itclay.heima_mm.domain.store.Company;
 import xyz.itclay.heima_mm.domain.store.Course;
+import xyz.itclay.heima_mm.domain.store.Question;
 import xyz.itclay.heima_mm.domain.system.Dept;
+import xyz.itclay.heima_mm.domain.system.Module;
+import xyz.itclay.heima_mm.domain.system.Role;
 import xyz.itclay.heima_mm.domain.system.User;
 import xyz.itclay.heima_mm.service.impl.store.CatalogServiceImpl;
 import xyz.itclay.heima_mm.service.impl.store.CompanyServiceImpl;
 import xyz.itclay.heima_mm.service.impl.store.CourseServiceImpl;
+import xyz.itclay.heima_mm.service.impl.store.QuestionServiceImpl;
 import xyz.itclay.heima_mm.service.impl.system.DeptServiceImpl;
+import xyz.itclay.heima_mm.service.impl.system.ModuleServiceImpl;
+import xyz.itclay.heima_mm.service.impl.system.RoleServiceImpl;
 import xyz.itclay.heima_mm.service.impl.system.UserServiceImpl;
 import xyz.itclay.heima_mm.service.store.CatalogService;
 import xyz.itclay.heima_mm.service.store.CompanyService;
 import xyz.itclay.heima_mm.service.store.CourseService;
+import xyz.itclay.heima_mm.service.store.QuestionService;
 import xyz.itclay.heima_mm.service.system.DeptService;
+import xyz.itclay.heima_mm.service.system.ModuleService;
+import xyz.itclay.heima_mm.service.system.RoleService;
 import xyz.itclay.heima_mm.service.system.UserService;
 
 import javax.servlet.ServletException;
@@ -36,6 +45,9 @@ public class PathServlet extends BaseServlet {
     private final UserService userService = new UserServiceImpl();
     private final CourseService courseService = new CourseServiceImpl();
     private final CatalogService catalogService = new CatalogServiceImpl();
+    private final QuestionService questionService = new QuestionServiceImpl();
+    private final RoleService roleService = new RoleServiceImpl();
+    private final ModuleService moduleService=new ModuleServiceImpl();
 
     /**
      * 登录按钮跳转到主界面
@@ -127,7 +139,8 @@ public class PathServlet extends BaseServlet {
      * 跳转到添加题目类型列表
      */
     public void addCatalog(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//        List<Course> courseList = courseService.findAll();
+        List<Course> courseList = courseService.findAll();
+        req.setAttribute("courseList", courseList);
         req.getRequestDispatcher("/WEB-INF/pages/store/catalog/add.jsp").forward(req, resp);
     }
 
@@ -136,8 +149,71 @@ public class PathServlet extends BaseServlet {
      */
     public void updateCatalog(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String id = req.getParameter("id");
-        Catalog catalog=catalogService.findById(id);
-        req.setAttribute("catalog",catalog);
+        Catalog catalog = catalogService.findById(id);
+        req.setAttribute("catalog", catalog);
         req.getRequestDispatcher("/WEB-INF/pages/store/catalog/update.jsp").forward(req, resp);
+    }
+
+    /**
+     * 跳转到添加题目界面
+     */
+    public void addQuestion(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        List<Company> companyList = companyService.findAll();
+        List<Catalog> catalogList = catalogService.findAll();
+
+        req.setAttribute("companyList", companyList);
+        req.setAttribute("catalogList", catalogList);
+        req.getRequestDispatcher("/WEB-INF/pages/store/question/add.jsp").forward(req, resp);
+    }
+
+    /**
+     * 跳转到编辑题目界面
+     */
+    public void updateQuestion(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        List<Company> companyList = companyService.findAll();
+        List<Catalog> catalogList = catalogService.findAll();
+        req.setAttribute("companyList", companyList);
+        req.setAttribute("catalogList", catalogList);
+        String id = req.getParameter("id");
+        Question question = questionService.findById(id);
+        req.setAttribute("question", question);
+        req.getRequestDispatcher("/WEB-INF/pages/store/question/update.jsp").forward(req, resp);
+    }
+
+    /**
+     * 跳转到题目选项列表
+     */
+    public void questionItem(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        req.getRequestDispatcher("/WEB-INF/pages/store/questionItem/list.jsp").forward(req, resp);
+    }
+
+    /**
+     * 更新角色信息
+     */
+    public void updateRole(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String id = req.getParameter("id");
+        Role role = roleService.findById(id);
+        req.setAttribute("role", role);
+        req.getRequestDispatcher("/WEB-INF/pages/system/role/update.jsp").forward(req, resp);
+    }
+
+    /**
+     * 跳转到添加用户角色的界面
+     */
+    public void addRole(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        req.getRequestDispatcher("/WEB-INF/pages/system/role/add.jsp").forward(req, resp);
+    }
+
+    /**
+     * 跳转到编辑模块界面
+     */
+    public void updateModule(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String id = req.getParameter("id");
+        Module module = moduleService.findById(id);
+//        h获取所有部门的信息，设置回显到修改页面
+        List<Module> moduleList=moduleService.findByAll();
+        req.setAttribute("moduleList", moduleList);
+        req.setAttribute("module", module);
+        req.getRequestDispatcher("/WEB-INF/pages/system/module/update.jsp").forward(req, resp);
     }
 }

@@ -47,4 +47,7 @@ public interface CompanyService {
      * @param id id
      */
     void deleteCompany(String id);
+
+
+    List<Company> findAll();
 }

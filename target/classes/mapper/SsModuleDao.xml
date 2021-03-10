@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace=".dao.SsModuleDao">
+
+    <resultMap type=".entity.SsModule" id="SsModuleMap">
+        <result property="moduleId" column="module_id" jdbcType="VARCHAR"/>
+        <result property="parentId" column="parent_id" jdbcType="VARCHAR"/>
+        <result property="parentName" column="parent_name" jdbcType="VARCHAR"/>
+        <result property="name" column="name" jdbcType="VARCHAR"/>
+        <result property="isLeaf" column="is_leaf" jdbcType="NUMERIC"/>
+        <result property="ico" column="ico" jdbcType="VARCHAR"/>
+        <result property="cpermission" column="cpermission" jdbcType="VARCHAR"/>
+        <result property="curl" column="curl" jdbcType="VARCHAR"/>
+        <result property="ctype" column="ctype" jdbcType="NUMERIC"/>
+        <result property="state" column="state" jdbcType="NUMERIC"/>
+        <result property="belong" column="belong" jdbcType="VARCHAR"/>
+        <result property="remark" column="remark" jdbcType="VARCHAR"/>
+        <result property="orderNo" column="order_no" jdbcType="NUMERIC"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="SsModuleMap">
+        select module_id,
+               parent_id,
+               parent_name,
+               name,
+               is_leaf,
+               ico,
+               cpermission,
+               curl,
+               ctype,
+               state,
+               belong,
+               remark,
+               order_no
+        from db_heima_mm.ss_module
+        where module_id = #{moduleId}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="SsModuleMap">
+        select module_id,
+               parent_id,
+               parent_name,
+               name,
+               is_leaf,
+               ico,
+               cpermission,
+               curl,
+               ctype,
+               state,
+               belong,
+               remark,
+               order_no
+        from db_heima_mm.ss_module
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="SsModuleMap">
+        select
+        module_id, parent_id, parent_name, name, is_leaf, ico, cpermission, curl, ctype, state, belong, remark, order_no
+        from db_heima_mm.ss_module
+        <where>
+            <if test="moduleId != null and moduleId != ''">
+                and module_id = #{moduleId}
+            </if>
+            <if test="parentId != null and parentId != ''">
+                and parent_id = #{parentId}
+            </if>
+            <if test="parentName != null and parentName != ''">
+                and parent_name = #{parentName}
+            </if>
+            <if test="name != null and name != ''">
+                and name = #{name}
+            </if>
+            <if test="isLeaf != null">
+                and is_leaf = #{isLeaf}
+            </if>
+            <if test="ico != null and ico != ''">
+                and ico = #{ico}
+            </if>
+            <if test="cpermission != null and cpermission != ''">
+                and cpermission = #{cpermission}
+            </if>
+            <if test="curl != null and curl != ''">
+                and curl = #{curl}
+            </if>
+            <if test="ctype != null">
+                and ctype = #{ctype}
+            </if>
+            <if test="state != null">
+                and state = #{state}
+            </if>
+            <if test="belong != null and belong != ''">
+                and belong = #{belong}
+            </if>
+            <if test="remark != null and remark != ''">
+                and remark = #{remark}
+            </if>
+            <if test="orderNo != null">
+                and order_no = #{orderNo}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="moduleId" useGeneratedKeys="true">
+        insert into db_heima_mm.ss_module(parent_id, parent_name, name, is_leaf, ico, cpermission, curl, ctype, state,
+                                          belong, remark, order_no)
+        values (#{parentId}, #{parentName}, #{name}, #{isLeaf}, #{ico}, #{cpermission}, #{curl}, #{ctype}, #{state},
+                #{belong}, #{remark}, #{orderNo})
+    </insert>
+
+    <insert id="insertBatch" keyProperty="moduleId" useGeneratedKeys="true">
+        insert into db_heima_mm.ss_module(parent_id, parent_name, name, is_leaf, ico, cpermission, curl, ctype, state,
+        belong, remark, order_no)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.parentId}, #{entity.parentName}, #{entity.name}, #{entity.isLeaf}, #{entity.ico},
+            #{entity.cpermission}, #{entity.curl}, #{entity.ctype}, #{entity.state}, #{entity.belong}, #{entity.remark},
+            #{entity.orderNo})
+        </foreach>
+    </insert>
+
+    <insert id="insertOrUpdateBatch" keyProperty="moduleId" useGeneratedKeys="true">
+        insert into db_heima_mm.ss_module(parent_id, parent_name, name, is_leaf, ico, cpermission, curl, ctype, state,
+        belong, remark, order_no)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.parentId}, #{entity.parentName}, #{entity.name}, #{entity.isLeaf}, #{entity.ico},
+            #{entity.cpermission}, #{entity.curl}, #{entity.ctype}, #{entity.state}, #{entity.belong}, #{entity.remark},
+            #{entity.orderNo})
+        </foreach>
+        on duplicate key update
+        parent_id = values(parent_id) , parent_name = values(parent_name) , name = values(name) , is_leaf =
+        values(is_leaf) , ico = values(ico) , cpermission = values(cpermission) , curl = values(curl) , ctype =
+        values(ctype) , state = values(state) , belong = values(belong) , remark = values(remark) , order_no =
+        values(order_no)
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update db_heima_mm.ss_module
+        <set>
+            <if test="parentId != null and parentId != ''">
+                parent_id = #{parentId},
+            </if>
+            <if test="parentName != null and parentName != ''">
+                parent_name = #{parentName},
+            </if>
+            <if test="name != null and name != ''">
+                name = #{name},
+            </if>
+            <if test="isLeaf != null">
+                is_leaf = #{isLeaf},
+            </if>
+            <if test="ico != null and ico != ''">
+                ico = #{ico},
+            </if>
+            <if test="cpermission != null and cpermission != ''">
+                cpermission = #{cpermission},
+            </if>
+            <if test="curl != null and curl != ''">
+                curl = #{curl},
+            </if>
+            <if test="ctype != null">
+                ctype = #{ctype},
+            </if>
+            <if test="state != null">
+                state = #{state},
+            </if>
+            <if test="belong != null and belong != ''">
+                belong = #{belong},
+            </if>
+            <if test="remark != null and remark != ''">
+                remark = #{remark},
+            </if>
+            <if test="orderNo != null">
+                order_no = #{orderNo},
+            </if>
+        </set>
+        where module_id = #{moduleId}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete
+        from db_heima_mm.ss_module
+        where module_id = #{moduleId}
+    </delete>
+
+</mapper>
+

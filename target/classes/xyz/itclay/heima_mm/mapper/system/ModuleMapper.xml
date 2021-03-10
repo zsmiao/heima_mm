@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="xyz.itclay.heima_mm.mapper.system.ModuleMapper">
+
+<!--    <select id="findAuthorDataByRid" parameterType="string" resultType="Map">
+        select
+            module_id as id,
+            parent_id as pId,
+            name as name,
+            case
+                when module_id in (select module_id from ss_role_module where role_id = #{roleId})
+                    then 'true'
+                    else 'false'
+                    end
+                as checked
+        from
+            ss_module
+    </select>-->
+</mapper>

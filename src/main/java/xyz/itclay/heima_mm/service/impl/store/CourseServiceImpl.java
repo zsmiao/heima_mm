@@ -71,6 +71,7 @@ public class CourseServiceImpl implements CourseService {
 
     @Override
     public List<Course> findAll() {
-        return null;
+        CourseMapper mapper = MyBatisUtils.getMapper(CourseMapper.class);
+        return mapper.findAll();
     }
 }

@@ -34,4 +34,10 @@ public interface CatalogMapper {
 
     @Select(" select * from db_heima_mm.st_catalog where id = #{id}")
     Catalog findById(String id);
+
+    @Insert(" insert into db_heima_mm.st_catalog(id,name, state, remark, order_no, create_by, create_dept, create_time,\n" +
+            "                                           update_by, update_time, course_id, course_name)\n" +
+            "        values (#{id},#{name}, #{state}, #{remark}, #{orderNo}, #{createBy}, #{createDept}, #{createTime}, #{updateBy},\n" +
+            "                #{updateTime}, #{courseId}, #{courseName})")
+    void addCatalog(Catalog catalog);
 }

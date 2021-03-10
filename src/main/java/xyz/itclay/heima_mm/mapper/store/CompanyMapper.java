@@ -1,9 +1,6 @@
 package xyz.itclay.heima_mm.mapper.store;
 
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.*;
 import xyz.itclay.heima_mm.domain.store.Company;
 
 import java.util.List;

@@ -24,4 +24,8 @@ public interface CatalogService {
      * @return 题目类型
      */
     Catalog findById(String id);
+
+    List<Catalog> findAll();
+
+    void addCatalog(Catalog catalog);
 }
